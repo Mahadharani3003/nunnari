@@ -97,3 +97,4 @@ insert into storage.buckets (id, name, public) values ('attachments', 'attachmen
 create policy "Users can upload attachments" on storage.objects for insert with check (bucket_id = 'attachments' and auth.uid() = owner);
 create policy "Users can read own attachments" on storage.objects for select using (bucket_id = 'attachments' and auth.uid() = owner);
 create policy "Users can delete own attachments" on storage.objects for delete using (bucket_id = 'attachments' and auth.uid() = owner);
+G

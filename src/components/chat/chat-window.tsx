@@ -134,9 +134,12 @@ export function ChatWindow({ userId, conversationId, initialMessages = [] }: Cha
                     m.id === assistantId ? { ...m, content: data.data } : m
                   ));
                 } else if (data.type === 'error') {
-                  throw new Error(data.data);
+                  throw new Error(data.data); // This will be caught by the new catch below
                 }
               } catch (e) {
+                if (e instanceof Error && e.message !== 'Unexpected end of JSON input' && !e.message.includes('JSON')) {
+                  throw e; // Rethrow actual errors instead of swallowing them
+                }
                 // ignore parse error on partial chunks
               }
             }

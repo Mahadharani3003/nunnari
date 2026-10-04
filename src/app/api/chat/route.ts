@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { runAgent } from '@/lib/ai/agent';
 import { ChatRequest } from '@/types/chat';
 
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   try {
     const body = await request.json() as ChatRequest;
